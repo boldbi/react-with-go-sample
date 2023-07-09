@@ -17,20 +17,6 @@ ul {
   padding-left: 0;
 }
 
-.active {
-  background-color: burlywood;
-}
-
-.e-waiting {
-  position: fixed;
-  display: block;
-  margin: 0px auto;
-  width: 54px;
-  height: 54px;
-  zoom: 0.5;
-  margin-left: 55px;
-}
-
 #container {
   width: 13%;
   float: left;
@@ -85,16 +71,6 @@ app-root {
   padding-top: 2px;
   padding-bottom: 18px;
   cursor: pointer
-}
-
-.e-dbrd-blueWaitingIndcator {
-  -webkit-animation: rotate 2s linear infinite;
-  animation: rotate 2s linear infinite;
-  height: 54px;
-  width: 54px;
-  top: 50%;
-  left: 50%;
-  position: relative;
 }
 
 #grid-title {
