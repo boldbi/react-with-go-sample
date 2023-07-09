@@ -1,5 +1,4 @@
 import React from 'react';
-import '../index.css';
 import '../index';
 import {BoldBI} from '@boldbi/boldbi-embedded-sdk';
 
