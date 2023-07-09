@@ -4,7 +4,7 @@ import '../index';
 import {BoldBI} from '@boldbi/boldbi-embedded-sdk';
 
 //Url of the authorizationserver action in the Go application(http://localhost:8086/authorizationserver). Learn more about authorize server [here](https://help.syncfusion.com/bold-bi/embedded-bi/javascript/authorize-server)
-const authorizationUrl = "http://localhost:8086/authorizationserver";
+const authorizationUrl = "http://localhost:8086/authorizationServer";
 
 var BoldBiObj;
 

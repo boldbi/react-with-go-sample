@@ -28,19 +28,7 @@ type EmbedConfig struct {
 var config EmbedConfig
 
 func main() {
-	// Read the embedConfig.json file
-	data, err := ioutil.ReadFile("embedConfig.json")
-	if err != nil {
-		log.Fatal("Error: embedConfig.json file not found.")
-	}
-
-	// Unmarshal the JSON data into the config struct
-	err = json.Unmarshal(data, &config)
-	if err != nil {
-		log.Fatal("Error decoding JSON:", err)
-	}
-
-	http.HandleFunc("/authorizationserver", AuthorizationServer)
+	http.HandleFunc("/authorizationServer", authorizationServer)
 	http.HandleFunc("/getServerDetails", getServerDetails)
 	log.Fatal(http.ListenAndServe(":8086", nil))
 }
@@ -53,7 +41,7 @@ func getServerDetails(w http.ResponseWriter, r *http.Request) {
 
 	data, err := ioutil.ReadFile("embedConfig.json")
 	if err != nil {
-		log.Fatal("Error reading embedConfig.json:", err)
+		log.Fatal("Error: embedConfig.json file not found.")
 	}
 
 	err = json.Unmarshal(data, &config)
@@ -61,7 +49,7 @@ func getServerDetails(w http.ResponseWriter, r *http.Request) {
 	w.Write(response)
 }
 
-func AuthorizationServer(w http.ResponseWriter, r *http.Request) {
+func authorizationServer(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Context-Type", "application/x-www-form-urlencoded")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "POST")
