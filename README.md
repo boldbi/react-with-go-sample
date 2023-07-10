@@ -74,7 +74,7 @@ This project was created using React with Go. In this sample React application a
   > **NOTE:** If you are using Node.js version 18.16, you can update the `package.json` file by adding the following line as a `script` within the `start` command. Make sure to replace the existing line with this updated script.<br/>
     "start": "react-scripts --openssl-legacy-provider start"
 
-    ![dashboard image](https://github.com/boldbi/aspnet-core-sample/assets/91586758/1407fd9b-abaa-47f5-b02a-fbadd8bc2388)
+![dashboard image](https://github.com/boldbi/aspnet-core-sample/assets/91586758/1407fd9b-abaa-47f5-b02a-fbadd8bc2388)
 
 Please refer to the [help documentation](https://help.boldbi.com/embedding-options/embedding-sdk/samples/react-with-go/#how-to-run-the-sample) to know how to run the sample.
 
