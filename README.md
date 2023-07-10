@@ -14,7 +14,7 @@ This project was created using React with Go. In this sample React application a
 
  #### Help link
 
- * https://help.boldbi.com/embedded-bi/faq/where-can-i-find-the-product-version/
+ * To check the Bold BI server version, refer to this [help documentation](https://help.boldbi.com/embedded-bi/faq/where-can-i-find-the-product-version/). Once you know the Bold BI server version, use the Embedded SDK CDN of the same version.
 
  #### Supported browsers
   
