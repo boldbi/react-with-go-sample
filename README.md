@@ -41,7 +41,10 @@ This project was created using React with Go. In this sample React application a
 
   ### Run a Sample Using Visual Studio Code
  
-  * Open the `Go` sample in Visual Studio Code.  
+  * Open the `Go` sample in Visual Studio Code.
+
+  * Install the extension `Go` in Visual Studio Code. Please refer to the following image.
+    ![Extension](https://github.com/boldbi/aspnet-core-sample/assets/91586758/8cc5ca2f-f59f-4bd1-bb5c-3dc00ac1b2a8)
 
   * Run the back-end `Go` sample using the following command `go run main.go`.
 
