@@ -1,117 +1,63 @@
-# BoldBI Embedding React with Go Sample
+# Bold BI Embedded Sample in React with Go
 
- This Bold BI React with Go sample contains the Dashboard embedding sample. In this sample React application act as the front-end and the Go sample act as the back-end application. This sample demonstrates the dashboard rendering with the available dashboard in your Bold BI server.
+This project was created using React with Go. In this sample React application act as the front-end and the Go sample act as the back-end application. This application aims to demonstrate how to render the dashboard available on your Bold BI server.
 
- This section guides you using the Bold BI dashboard in your React with Go sample application.
+## Dashboard view
 
- * [Requirements to run the demo](#requirements-to-run-the-demo)
- * [Using the React with Go sample](#using-the-react-with-go-sample)
- * [Online Demos](#online-demos)
- * [Documentation](#documentation)
+![Dashboard View](https://github.com/boldbi/aspnet-core-sample/assets/91586758/4af68f49-ffc0-400a-a323-55a3f3600a1d)
 
- ## Requirements to run the demo
-
-The samples require the following requirements to run.
+ ## Requirements/Prerequisites
 
  * [Go installer](https://go.dev/dl/)
  * [Visual Studio Code](https://code.visualstudio.com/download)
  * [Node.js](https://nodejs.org/en/)
 
- ## Using the React with Go sample
+ #### Help link
+
+ * https://help.boldbi.com/embedded-bi/faq/where-can-i-find-the-product-version/
+
+ #### Supported browsers
+  
+  * Google Chrome, Microsoft Edge, Mozilla Firefox.
+
+ ## Configuration
+
+  * Please ensure you have enabled embed authentication on the `embed settings` page. If it is not currently enabled, please refer to the following image or detailed [instructions](https://help.boldbi.com/site-administration/embed-settings/#get-embed-secret-code) to enable it.
+
+    ![Embed Settings](https://github.com/boldbi/aspnet-core-sample/assets/91586758/b3a81978-9eb4-42b2-92bb-d1e2735ab007)
+
+  * To download the `embedConfig.json` file, please follow this [link](https://help.boldbi.com/site-administration/embed-settings/#get-embed-configuration-file) for reference. Additionally, you can refer to the following image for visual guidance.
+
+     ![Embed Settings Download](https://github.com/boldbi/aspnet-core-sample/assets/91586758/d27d4cfc-6a3e-4c34-975e-f5f22dea6172)
+     ![EmbedConfig Properties](https://github.com/boldbi/aspnet-core-sample/assets/91586758/d6ce925a-0d4c-45d2-817e-24d6d59e0d63)
+
+  * Copy the downloaded `embedConfig.json` file and paste it into the designated [location](https://github.com/boldbi/react-with-go-sample/tree/master/Go) within the application. Please ensure you have placed it in the application, as shown in the following image.
+    
+    ![EmbedConfig image](https://github.com/boldbi/aspnet-core-sample/assets/91586758/4d1489c0-ea7a-40ab-b067-e116ad9bee5a)
+
+ ## Developer IDE
+
+  * Visual studio code(https://code.visualstudio.com/download)
+
+  ### Run a Sample Using Visual Studio Code
  
- * Open the file `main.go` of the Go sample in Visual studio code. 
+  * Open the `Go` sample in Visual Studio Code.  
 
- * Please change the following properties in the `main.go` file as per your Bold BI Server.
+  * Run the back-end `Go` sample using the following command `go run main.go`.
 
-<meta charset="utf-8"/>
-<table>
-  <tbody>
-    <tr>
-        <td align="left">EmbedSecret</td>
-        <td align="left">Get your EmbedSecret key from the Embed tab by enabling the `Enable embed authentication` on the Administration page https://help.boldbi.com/embedded-bi/site-administration/embed-settings/.</td>
-    </tr>
-    <tr>
-        <td align="left">UserEmail</td>
-        <td align="left">UserEmail of the Admin in your Bold BI, which would be used to get the dashboard list.</td>
-    </tr>
-  </tbody>
-</table>
+  * Open the `React` sample in a new window of Visual Studio Code.
+   
+  * To install all dependent packages, use the following command `npm install`.
 
-* Now run the back-end Go sample by using the following command in the terminal.
+  * Finally, run the application using the command `npm start`. After executing the command, the application will automatically launch in the default browser. You can access it at the specified port number (e.g., http://localhost:3000/).
 
-```bash
- go run main.go
-```
+    ![dashboard image](https://github.com/boldbi/aspnet-core-sample/assets/91586758/4af68f49-ffc0-400a-a323-55a3f3600a1d)
 
-* Open the `React` sample in a new window of Visual studio code.
-
-* Open the `DashboardListing.js` in the following location, /src/DashboardListing/DashboardListing.js.
-
-* Please change the following properties in the `DashboardListing.js` file as per your Bold BI server and back-end application.
-
-    <meta charset="utf-8"/>
-    <table>
-    <tbody>
-        <tr>
-            <td align="left">rootUrl</td>
-            <td align="left">Dashboard Server URL (Eg: http://localhost:5000/bi, http://demo.boldbi.com/bi).</td>
-        </tr>
-        <tr>
-            <td align="left">siteIdentifier</td>
-            <td align="left">For the Bold BI Enterprise edition, it should be like `site/site1`. For Bold BI Cloud, it should be an empty string.</td>
-        </tr>
-        <tr>
-            <td align="left">authorizationUrl</td>
-            <td align="left">Url of the GetDetails action in the Go application(http://localhost:8086/getDetails)</td>
-        </tr>
-        <tr>
-            <td align="left">environment</td>
-            <td align="left">Your Bold BI application environment. (If Cloud, you should use `cloud,` if Enterprise, you should use `enterprise`).</td>
-        </tr>
-        <tr>
-            <td align="left">dashboardId</td>
-            <td align="left">Provide the dashboard id of the dashboard you want to embed in view or edit mode. Ignore this property to create a new dashboard.</td>
-        </tr>
-    </tbody>
-    </table>
-
-
-
-### Install npm
-
-To install all dependent packages, use the below command 
-
-```bash
-npm install
-```
-
-### Install Bold BI Embedded SDK package
-
- To install the Bold BI Embedded SDK package using the following command,
-
-```bash
-npm install -save @boldbi/boldbi-embedded-sdk
-```
-
-### Run/Serve
-
-To run the sample, use the below command
-
-```bash
-npm start
-```
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-
-Please refer to the [help documentation](https://help.boldbi.com/embedded-bi/javascript-based/samples/v3.3.40-or-later/react-with-go/#how-to-run-the-sample) to know how to run the sample.
+Please refer to the [help documentation](https://help.boldbi.com/embedding-options/embedding-sdk/samples/react-with-go/#how-to-run-the-sample) to know how to run the sample.
 
 ## Online Demos
 
 Look at the Bold BI Embedding sample to live demo [here](https://samples.boldbi.com/embed).
-
 
 ## Documentation
 
