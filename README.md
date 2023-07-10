@@ -35,6 +35,18 @@ This project was created using React with Go. In this sample React application a
     
     ![EmbedConfig image](https://github.com/boldbi/aspnet-core-sample/assets/91586758/4d1489c0-ea7a-40ab-b067-e116ad9bee5a)
 
+ ## Run a Sample Using Command Line Interface 
+    
+  * Open the command line interface and navigate to the specified file [location](https://github.com/boldbi/react-with-go-sample/tree/master/Go) where the project is located.
+
+  * Run the back-end `Go` sample using the following command `go run main.go`.
+
+  * Open the command line interface and navigate to the specified file [location](https://github.com/boldbi/react-with-go-sample/tree/master/React) where the project is located.
+   
+  * To install all dependent packages, use the following command `npm install`.
+
+  * Finally, run the application using the command `npm start`. After executing the command, the application will automatically launch in the default browser. You can access it at the specified port number (e.g., http://localhost:3000/).
+
  ## Developer IDE
 
   * Visual studio code(https://code.visualstudio.com/download)
