@@ -49,7 +49,7 @@ This project was created using React with Go. In this sample React application a
 
   * Finally, run the application using the command `npm start`. After executing the command, the application will automatically launch in the default browser. You can access it at the specified port number (e.g., http://localhost:3000/).
 
-  > **NOTE:** If you are using Node.js version 18.16, you can update the `package.json` file by adding the following line as a `script` within the `start` command. Make ensure that you replace the existing line with this updated script.<br/>
+  > **NOTE:** If you are using Node.js version 17.2 and 18.16, you can update the `package.json` file by adding the following line as a `script` within the `start` command. Make ensure that you replace the existing line with this updated script.<br/>
     "start": "react-scripts --openssl-legacy-provider start"
 
  ## Developer IDE
@@ -71,7 +71,7 @@ This project was created using React with Go. In this sample React application a
 
   * Finally, run the application using the command `npm start`. After executing the command, the application will automatically launch in the default browser. You can access it at the specified port number (e.g., http://localhost:3000/).
 
-  > **NOTE:** If you are using Node.js version 18.16, you can update the `package.json` file by adding the following line as a `script` within the `start` command. Make ensure that you replace the existing line with this updated script.<br/>
+  > **NOTE:** If you are using Node.js version 17.2 and 18.16, you can update the `package.json` file by adding the following line as a `script` within the `start` command. Make ensure that you replace the existing line with this updated script.<br/>
     "start": "react-scripts --openssl-legacy-provider start"
 
 ![dashboard image](https://github.com/boldbi/aspnet-core-sample/assets/91586758/1407fd9b-abaa-47f5-b02a-fbadd8bc2388)
