@@ -14,10 +14,6 @@ This project was created using React with Go. In this sample React application a
  
  > **NOTE:** Node.js v14.16 to v18.16 are supported.
 
- #### Help link
-
- * To check the Bold BI server version, refer to this [help documentation](https://help.boldbi.com/embedded-bi/faq/where-can-i-find-the-product-version/). Once you know the Bold BI server version, use the Embedded SDK CDN of the same version.
-
  #### Supported browsers
   
   * Google Chrome, Microsoft Edge, Mozilla Firefox.
