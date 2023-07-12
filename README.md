@@ -1,6 +1,6 @@
 # Bold BI Embedded Sample in React with Go
 
-This project was created using React with Go. In this sample React application act as the front-end and the Go sample act as the back-end application. This application aims to demonstrate how to render the dashboard available on your Bold BI server.
+This Bold BI React with Go sample contains the Dashboard embedding sample. In this sample React application act as the front-end and the Go sample act as the back-end application. This application aims to demonstrate how to render the dashboard available on your Bold BI server.
 
 ## Dashboard view
 
@@ -42,11 +42,11 @@ This project was created using React with Go. In this sample React application a
   * Open the command line interface and navigate to the specified file [location](https://github.com/boldbi/react-with-go-sample/tree/master/React) where the project is located.
    
   * To install all dependent packages, use the following command `npm install`.
+    
+    > **NOTE:** If you are using Node.js version higher than v16.17, you can update the `package.json` file by adding the following line as a `script` within the `start` command. Make ensure that you replace the existing line with this updated script.<br/>
+    "start": "react-scripts --openssl-legacy-provider start"
 
   * Finally, run the application using the command `npm start`. After executing the command, the application will automatically launch in the default browser. You can access it at the specified port number (e.g., http://localhost:3000/).
-
-  > **NOTE:** If you are using Node.js version higher than v16.17, you can update the `package.json` file by adding the following line as a `script` within the `start` command. Make ensure that you replace the existing line with this updated script.<br/>
-    "start": "react-scripts --openssl-legacy-provider start"
 
  ## Developer IDE
 
@@ -64,11 +64,11 @@ This project was created using React with Go. In this sample React application a
   * Open the `React` sample in a new window of Visual Studio Code.
    
   * To install all dependent packages, use the following command `npm install`.
+    
+    > **NOTE:** If you are using Node.js version higher than v16.17, you can update the `package.json` file by adding the following line as a `script` within the `start` command. Make ensure that you replace the existing line with this updated script.<br/>
+    "start": "react-scripts --openssl-legacy-provider start"
 
   * Finally, run the application using the command `npm start`. After executing the command, the application will automatically launch in the default browser. You can access it at the specified port number (e.g., http://localhost:3000/).
-
-  > **NOTE:** If you are using Node.js version higher than v16.17, you can update the `package.json` file by adding the following line as a `script` within the `start` command. Make ensure that you replace the existing line with this updated script.<br/>
-    "start": "react-scripts --openssl-legacy-provider start"
 
 ![dashboard image](https://github.com/boldbi/aspnet-core-sample/assets/91586758/1407fd9b-abaa-47f5-b02a-fbadd8bc2388)
 
