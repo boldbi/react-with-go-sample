@@ -13,19 +13,43 @@ import (
 	"time"
 )
 
-// Set EmbedSecret key from Bold BI Server. Please refer this link(https://help.syncfusion.com/bold-bi/on-premise/site-settings/embed-settings)
-var embedSecret = ""
-
-// Enter your BoldBI Server credentials
-var userMail = ""
-
-func main() {
-	http.HandleFunc("/getDetails", getEmbedDetails)
-	log.Fatal(http.ListenAndServe(":8086", nil))
-
+type EmbedConfig struct {
+	DashboardId    string `json:"DashboardId"`
+	ServerUrl      string `json:"ServerUrl"`
+	UserEmail      string `json:"UserEmail"`
+	EmbedSecret    string `json:"EmbedSecret"`
+	EmbedType      string `json:"EmbedType"`
+	Environment    string `json:"Environment"`
+	ExpirationTime string `json:"ExpirationTime"`
+	SiteIdentifier string `json:"SiteIdentifier"`
 }
 
-func getEmbedDetails(w http.ResponseWriter, r *http.Request) {
+// Create an instance of EmbedConfig struct
+var config EmbedConfig
+
+func main() {
+	http.HandleFunc("/authorizationServer", authorizationServer)
+	http.HandleFunc("/getServerDetails", getServerDetails)
+	log.Fatal(http.ListenAndServe(":8086", nil))
+}
+
+func getServerDetails(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Context-Type", "application/x-www-form-urlencoded")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
+	data, err := ioutil.ReadFile("embedConfig.json")
+	if err != nil {
+		log.Fatal("Error: embedConfig.json file not found.")
+	}
+
+	err = json.Unmarshal(data, &config)
+	response, err := json.Marshal(config)
+	w.Write(response)
+}
+
+func authorizationServer(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Context-Type", "application/x-www-form-urlencoded")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "POST")
@@ -40,7 +64,7 @@ func getEmbedDetails(w http.ResponseWriter, r *http.Request) {
 		} else {
 			serverAPIUrl := queryString.(map[string]interface{})["dashboardServerApiUrl"].(string)
 			embedQueryString := queryString.(map[string]interface{})["embedQuerString"].(string)
-			embedQueryString += "&embed_user_email=" + userMail
+			embedQueryString += "&embed_user_email=" + config.UserEmail
 			timeStamp := time.Now().Unix()
 			embedQueryString += "&embed_server_timestamp=" + strconv.FormatInt(timeStamp, 10)
 			signatureString, err := getSignatureUrl(embedQueryString)
@@ -62,7 +86,7 @@ func getEmbedDetails(w http.ResponseWriter, r *http.Request) {
 }
 
 func getSignatureUrl(queryData string) (string, error) {
-	encoding := ([]byte(embedSecret))
+	encoding := ([]byte(config.EmbedSecret))
 	messageBytes := ([]byte(queryData))
 	hmacsha1 := hmac.New(sha256.New, encoding)
 	hmacsha1.Write(messageBytes)
