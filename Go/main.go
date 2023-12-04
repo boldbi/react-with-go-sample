@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-type EmbedConfig struct {
+type ServerEmbedConfigData struct {
 	DashboardId    string `json:"DashboardId"`
 	ServerUrl      string `json:"ServerUrl"`
 	UserEmail      string `json:"UserEmail"`
@@ -35,7 +35,7 @@ type ClientEmbedConfigData struct {
 var embedSecret string
 var userEmail string
 
-var config EmbedConfig                          // Create an instance of ServerEmbedConfigData struct
+var serverEmbedConfigData ServerEmbedConfigData // Create an instance of ServerEmbedConfigData struct
 var clientEmbedConfigData ClientEmbedConfigData // Create an instance of ClientEmbedConfigData struct
 
 func main() {
@@ -51,13 +51,13 @@ func loadConfig() {
 		log.Fatal("Error: embedConfig.json file not found.")
 	}
 
-	var config EmbedConfig
-	if err := json.Unmarshal(data, &config); err != nil {
+	var serverEmbedConfigData ServerEmbedConfigData
+	if err := json.Unmarshal(data, &serverEmbedConfigData); err != nil {
 		log.Fatal("Error unmarshaling embedConfig.json:", err)
 	}
 
-	embedSecret = config.EmbedSecret
-	userEmail = config.UserEmail
+	embedSecret = serverEmbedConfigData.EmbedSecret
+	userEmail = serverEmbedConfigData.UserEmail
 }
 
 func getServerDetails(w http.ResponseWriter, r *http.Request) {
