@@ -13,51 +13,20 @@ import (
 	"time"
 )
 
-type ServerEmbedConfigData struct {
-	DashboardId    string `json:"DashboardId"`
-	ServerUrl      string `json:"ServerUrl"`
-	UserEmail      string `json:"UserEmail"`
-	EmbedSecret    string `json:"EmbedSecret"`
-	EmbedType      string `json:"EmbedType"`
-	Environment    string `json:"Environment"`
-	ExpirationTime string `json:"ExpirationTime"`
-	SiteIdentifier string `json:"SiteIdentifier"`
-}
+var embedConfig map[string]interface{}
 
-type ClientEmbedConfigData struct {
+type EmbedConfig struct {
 	DashboardId    string `json:"DashboardId"`
 	ServerUrl      string `json:"ServerUrl"`
 	EmbedType      string `json:"EmbedType"`
 	Environment    string `json:"Environment"`
 	SiteIdentifier string `json:"SiteIdentifier"`
 }
-
-var embedSecret string
-var userEmail string
-
-var serverEmbedConfigData ServerEmbedConfigData // Create an instance of ServerEmbedConfigData struct
-var clientEmbedConfigData ClientEmbedConfigData // Create an instance of ClientEmbedConfigData struct
 
 func main() {
-	loadConfig() // Load configuration values
 	http.HandleFunc("/authorizationServer", authorizationServer)
 	http.HandleFunc("/getServerDetails", getServerDetails)
 	log.Fatal(http.ListenAndServe(":8086", nil))
-}
-
-func loadConfig() {
-	data, err := ioutil.ReadFile("embedConfig.json")
-	if err != nil {
-		log.Fatal("Error: embedConfig.json file not found.")
-	}
-
-	var serverEmbedConfigData ServerEmbedConfigData
-	if err := json.Unmarshal(data, &serverEmbedConfigData); err != nil {
-		log.Fatal("Error unmarshaling embedConfig.json:", err)
-	}
-
-	embedSecret = serverEmbedConfigData.EmbedSecret
-	userEmail = serverEmbedConfigData.UserEmail
 }
 
 func getServerDetails(w http.ResponseWriter, r *http.Request) {
@@ -71,9 +40,19 @@ func getServerDetails(w http.ResponseWriter, r *http.Request) {
 		log.Fatal("Error: embedConfig.json file not found.")
 	}
 
-	err = json.Unmarshal(data, &clientEmbedConfigData)
-	response, err := json.Marshal(clientEmbedConfigData)
-	w.Write(response)
+	err = json.Unmarshal(data, &embedConfig)
+
+	// Create a custom struct to hold the specific properties you want to return.
+	clientEmbedConfigData := EmbedConfig{
+		DashboardId:    embedConfig["DashboardId"].(string),
+		ServerUrl:      embedConfig["ServerUrl"].(string),
+		SiteIdentifier: embedConfig["SiteIdentifier"].(string),
+		EmbedType:      embedConfig["EmbedType"].(string),
+		Environment:    embedConfig["Environment"].(string),
+	}
+
+	jsonResponse, err := json.Marshal(clientEmbedConfigData)
+	w.Write(jsonResponse)
 }
 
 func authorizationServer(w http.ResponseWriter, r *http.Request) {
@@ -89,6 +68,7 @@ func authorizationServer(w http.ResponseWriter, r *http.Request) {
 		if queryString, err := unmarshal(string(body)); err != nil {
 			log.Println("error converting", err)
 		} else {
+			userEmail := embedConfig["UserEmail"].(string)
 			serverAPIUrl := queryString.(map[string]interface{})["dashboardServerApiUrl"].(string)
 			embedQueryString := queryString.(map[string]interface{})["embedQuerString"].(string)
 			embedQueryString += "&embed_user_email=" + userEmail
@@ -113,6 +93,7 @@ func authorizationServer(w http.ResponseWriter, r *http.Request) {
 }
 
 func getSignatureUrl(queryData string) (string, error) {
+	embedSecret := embedConfig["EmbedSecret"].(string)
 	encoding := ([]byte(embedSecret))
 	messageBytes := ([]byte(queryData))
 	hmacsha1 := hmac.New(sha256.New, encoding)
