@@ -44,11 +44,8 @@ class DashboardListing extends React.Component {
   async componentDidMount() {
     try {
       const response = await fetch('http://localhost:8086/getServerDetails');
-      const data = await response.json();
-      this.setState({ embedConfig: data }, () => {
-        const embedConfig = this.state.embedConfig;
-        this.renderDashboard(embedConfig);
-      });
+      const embedConfig = await response.json();
+      this.renderDashboard(embedConfig);  
     } catch (error) {
       console.log("Error: embedConfig.json file not found.");
       this.setState({ toke: "error", items: "error" });
