@@ -45,13 +45,6 @@ This Bold BI React with Go sample contains the Dashboard embedding sample. In th
     
   * Finally, run the application using the command `npm start`. After executing the command, the application will automatically launch in the default browser. You can access it at the specified port number (e.g., http://localhost:3000/).
 
-> **NOTE:** If you are using React version lower than v18.0, you can update the `index.js` file by adding the following line. Ensure that you replace the existing `createRoot` line with the following line.</br>
-
-  ```js
-   import ReactDOM from 'react-dom';
-   ReactDOM.render(<App />, document.getElementById('root'));
-  ```
-
  ## Developer IDE
 
   * Visual studio code(https://code.visualstudio.com/download)
@@ -72,13 +65,6 @@ This Bold BI React with Go sample contains the Dashboard embedding sample. In th
   * Finally, run the application using the command `npm start`. After executing the command, the application will automatically launch in the default browser. You can access it at the specified port number (e.g., http://localhost:3000/).
 
 ![dashboard image](https://github.com/boldbi/aspnet-core-sample/assets/91586758/1407fd9b-abaa-47f5-b02a-fbadd8bc2388)
-
-> **NOTE:** If you are using React version lower than v18.0, you can update the `index.js` file by adding the following line. Ensure that you replace the existing `createRoot` line with the following line.</br>
-
-  ```js
-   import ReactDOM from 'react-dom';
-   ReactDOM.render(<App />, document.getElementById('root'));
-  ```
 
 Please refer to the [help documentation](https://help.boldbi.com/embedding-options/embedding-sdk/samples/react-with-go/#how-to-run-the-sample) to know how to run the sample.
 
