@@ -13,19 +13,15 @@ import (
 	"time"
 )
 
+var embedConfig map[string]interface{}
+
 type EmbedConfig struct {
 	DashboardId    string `json:"DashboardId"`
 	ServerUrl      string `json:"ServerUrl"`
-	UserEmail      string `json:"UserEmail"`
-	EmbedSecret    string `json:"EmbedSecret"`
 	EmbedType      string `json:"EmbedType"`
 	Environment    string `json:"Environment"`
-	ExpirationTime string `json:"ExpirationTime"`
 	SiteIdentifier string `json:"SiteIdentifier"`
 }
-
-// Create an instance of EmbedConfig struct
-var config EmbedConfig
 
 func main() {
 	http.HandleFunc("/authorizationServer", authorizationServer)
@@ -44,9 +40,19 @@ func getServerDetails(w http.ResponseWriter, r *http.Request) {
 		log.Fatal("Error: embedConfig.json file not found.")
 	}
 
-	err = json.Unmarshal(data, &config)
-	response, err := json.Marshal(config)
-	w.Write(response)
+	err = json.Unmarshal(data, &embedConfig)
+
+	// Create a custom struct to hold the specific properties you want to return.
+	clientEmbedConfigData := EmbedConfig{
+		DashboardId:    embedConfig["DashboardId"].(string),
+		ServerUrl:      embedConfig["ServerUrl"].(string),
+		SiteIdentifier: embedConfig["SiteIdentifier"].(string),
+		EmbedType:      embedConfig["EmbedType"].(string),
+		Environment:    embedConfig["Environment"].(string),
+	}
+
+	jsonResponse, err := json.Marshal(clientEmbedConfigData)
+	w.Write(jsonResponse)
 }
 
 func authorizationServer(w http.ResponseWriter, r *http.Request) {
@@ -62,9 +68,10 @@ func authorizationServer(w http.ResponseWriter, r *http.Request) {
 		if queryString, err := unmarshal(string(body)); err != nil {
 			log.Println("error converting", err)
 		} else {
+			userEmail := embedConfig["UserEmail"].(string)
 			serverAPIUrl := queryString.(map[string]interface{})["dashboardServerApiUrl"].(string)
 			embedQueryString := queryString.(map[string]interface{})["embedQuerString"].(string)
-			embedQueryString += "&embed_user_email=" + config.UserEmail
+			embedQueryString += "&embed_user_email=" + userEmail
 			timeStamp := time.Now().Unix()
 			embedQueryString += "&embed_server_timestamp=" + strconv.FormatInt(timeStamp, 10)
 			signatureString, err := getSignatureUrl(embedQueryString)
@@ -86,7 +93,8 @@ func authorizationServer(w http.ResponseWriter, r *http.Request) {
 }
 
 func getSignatureUrl(queryData string) (string, error) {
-	encoding := ([]byte(config.EmbedSecret))
+	embedSecret := embedConfig["EmbedSecret"].(string)
+	encoding := ([]byte(embedSecret))
 	messageBytes := ([]byte(queryData))
 	hmacsha1 := hmac.New(sha256.New, encoding)
 	hmacsha1.Write(messageBytes)
