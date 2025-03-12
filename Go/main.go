@@ -5,12 +5,14 @@ import (
 	"crypto/sha256"
 	"encoding/base64"
 	"encoding/json"
-	"io/ioutil"
+	"os"
+	"io"
 	"log"
 	"net/http"
 	"strconv"
 	"strings"
 	"time"
+	"fmt"
 )
 
 var embedConfig map[string]interface{}
@@ -26,6 +28,7 @@ type EmbedConfig struct {
 func main() {
 	http.HandleFunc("/authorizationServer", authorizationServer)
 	http.HandleFunc("/getServerDetails", getServerDetails)
+	fmt.Println("Go server is running on port 8086")
 	log.Fatal(http.ListenAndServe(":8086", nil))
 }
 
@@ -35,7 +38,7 @@ func getServerDetails(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Methods", "GET")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
-	data, err := ioutil.ReadFile("embedConfig.json")
+	data, err := os.ReadFile("embedConfig.json")
 	if err != nil {
 		log.Fatal("Error: embedConfig.json file not found.")
 	}
@@ -60,7 +63,7 @@ func authorizationServer(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "POST")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-	body, err := ioutil.ReadAll(r.Body)
+	body, err := io.ReadAll(r.Body)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -77,13 +80,11 @@ func authorizationServer(w http.ResponseWriter, r *http.Request) {
 			signatureString, err := getSignatureUrl(embedQueryString)
 			embedDetails := "/embed/authorize?" + embedQueryString + "&embed_signature=" + signatureString
 			query := serverAPIUrl + embedDetails
-			log.Println(query)
 			result, err := http.Get(query)
 			if err != nil {
 				log.Println(err)
 			}
-			log.Println(result)
-			response, err := ioutil.ReadAll(result.Body)
+			response, err := io.ReadAll(result.Body)
 			if err != nil {
 				log.Fatalln(err)
 			}
