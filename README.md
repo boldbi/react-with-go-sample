@@ -37,7 +37,7 @@ This Bold BI React with Go sample contains the Dashboard embedding sample. In th
 
 * Open the command line interface and navigate to the specified file [location](https://github.com/boldbi/react-with-go-sample/tree/master/Go) where the project is located.
 
-* Run the back-end `Go` sample using the following command `go run main.go`.
+* Run the back-end `Go` sample using the following command `go run tokengeneration.go`.
 
 * Open the command line interface and navigate to the specified file [location](https://github.com/boldbi/react-with-go-sample/tree/master/React) where the project is located.
 
@@ -56,7 +56,7 @@ This Bold BI React with Go sample contains the Dashboard embedding sample. In th
 * Install the extension `Go` in Visual Studio Code. Please refer to the following image.
     ![Extension](/images/go-extension.png)
 
-* Run the back-end `Go` sample using the following command `go run main.go`.
+* Run the back-end `Go` sample using the following command `go run tokengeneration.go`.
 
 * Open the `React` sample in a new window of Visual Studio Code.
 
