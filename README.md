@@ -35,11 +35,11 @@ This Bold BI React with Go sample contains the Dashboard embedding sample. In th
 
 ## Run a Sample Using Command Line Interface
 
-* Open the command line interface and navigate to the specified file [location](https://github.com/boldbi/react-with-go-sample/tree/master/Go) where the project is located.
+* Open the **command line interface** and navigate to the specified file [location](https://github.com/boldbi/react-with-go-sample/tree/master/Go) where the project is located.
 
-* Run the back-end `Go` sample using the following command `go run tokengeneration.go`.
+* Run the back-end `Go` sample using the following command `go run tokengeneration.go`, it will display a URL in the **command line interface**, typically something like (e.g., <http://localhost:8086>). Copy this URL and paste it by appending `/getServerDetails` into your default web browser.
 
-* Open the command line interface and navigate to the specified file [location](https://github.com/boldbi/react-with-go-sample/tree/master/React) where the project is located.
+* Open the **command line interface** and navigate to the specified file [location](https://github.com/boldbi/react-with-go-sample/tree/master/React) where the project is located.
 
 * To install all dependent packages, use the following command `npm install`.
 
@@ -51,20 +51,20 @@ This Bold BI React with Go sample contains the Dashboard embedding sample. In th
 
 ### Run a Sample Using Visual Studio Code
 
-* Open the `Go` sample in Visual Studio Code.
+* Open the `Go` sample in **Visual Studio Code**.
 
-* Install the extension `Go` in Visual Studio Code. Please refer to the following image.
+* Install the extension `Go` in **Visual Studio Code**. Please refer to the following image.
     ![Extension](/images/go-extension.png)
 
-* Run the back-end `Go` sample using the following command `go run tokengeneration.go`.
+* Run the back-end `Go` sample using the following command `go run tokengeneration.go`, it will display a URL in the **command line interface**, typically something like (e.g., <http://localhost:8086>). Copy this URL and paste it by appending `/getServerDetails` into your default web browser.
 
-* Open the `React` sample in a new window of Visual Studio Code.
+* Open the `React` sample in a new window of **Visual Studio Code**.
 
 * To install all dependent packages, use the following command `npm install`.
 
 * Finally, run the application using the command `npm start`. After executing the command, the application will automatically launch in the default browser. You can access it at the specified port number (e.g., <http://localhost:3000/>).
 
-![dashboard image](/images/dashboard.png)
+    ![dashboard image](/images/dashboard.png)
 
 Please refer to the [help documentation](https://help.boldbi.com/embedding-options/embedding-sdk/samples/react-with-go/#how-to-run-the-sample?utm_source=github&utm_medium=backlinks) to know how to run the sample.
 
