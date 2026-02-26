@@ -2,8 +2,8 @@ import React from 'react';
 import '../index';
 import { BoldBI } from '@boldbi/boldbi-embedded-sdk';
 
-//Url of the authorizationserver action in the Go application(http://localhost:8086/authorizationserver). Learn more about authorize server [here](https://help.syncfusion.com/bold-bi/embedded-bi/javascript/authorize-server)
-const authorizationUrl = "http://localhost:8086/authorizationServer";
+//Url of the tokenGeneration action in tokengeneration.go
+const tokenGenerationUrl = "http://localhost:8086/tokenGeneration";
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -12,19 +12,34 @@ class Dashboard extends React.Component {
     this.BoldBiObj = new BoldBI();
   };
 
-  renderDashboard(embedConfig) {
-    this.dashboard = BoldBI.create({
-      serverUrl: embedConfig.ServerUrl + "/" + embedConfig.SiteIdentifier,
-      dashboardId: embedConfig.DashboardId,
-      embedContainerId: "dashboard",
-      width: "100%",
-      height: window.innerHeight + 'px',
-      authorizationServer: {
-        url: authorizationUrl
+  getEmbedToken() {
+        return fetch(tokenGenerationUrl, { // Backend application URL
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({})
+        })
+          .then(response => {
+            if (!response.ok) throw new Error("Token fetch failed");
+            return response.text();
+          });
       }
-    });
-    this.dashboard.loadDashboard();
-  }
+    
+    renderDashboard(data) {
+      this.getEmbedToken()
+        .then(accessToken => {
+          const dashboard = BoldBI.create({
+            serverUrl: data.ServerUrl + "/" + data.SiteIdentifier,
+            dashboardId: data.DashboardId,
+            embedContainerId: "dashboard",
+            embedToken: accessToken
+          });
+
+          dashboard.loadDashboard();
+        })
+        .catch(err => {
+          console.error("Error rendering dashboard:", err);
+        });
+    };
 
   render() {
     return (
